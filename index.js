@@ -59,6 +59,22 @@ app.delete('/api/persons/:id', (req, res) => {
 app.post('/api/persons', (req, res) => {
   const body = req.body;
 
+  if (!body.name) {
+    return res.status(400).json({
+      error: 'missing name'
+    })
+  }
+  if (!body.number) {
+    return res.status(400).json({
+      error: 'missing number'
+    })
+  }
+  if (persons.find((p) => p.name.toUpperCase() === body.name.toUpperCase())) {
+    return res.status(400).json({
+      error: 'name must be unique'
+    })
+  }
+
   const person = {
     id: Math.ceil(Math.random() * (persons.length * 100)),
     name: body.name,
