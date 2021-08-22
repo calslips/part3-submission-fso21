@@ -1,7 +1,51 @@
+### succcessful POST req to persons
 POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
   "name": "Herman Bean",
   "number": "212-339-4100"
+}
+
+### unsuccessful POST req to persons due to missing name
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "number": "443-291-0938"
+}
+
+### unsuccessful POST req to persons due to empty name
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "",
+  "number": "921-655-1392"
+}
+
+### unsuccessful POST req to persons due to missing number
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Moor Ann"
+}
+
+### unsuccessful POST req to persons due to empty number
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Juwanna Mann",
+  "number": ""
+}
+
+### unsuccessful POST req to persons, name already exists
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "mary poppendieck",
+  "number": "39-23-6423122"
 }
