@@ -1,5 +1,5 @@
-### GET request for single resource
+### successful GET req for single resource
 GET http://localhost:3001/api/persons/3
 
-### GET request for non-existing resource
+### unsuccessful GET req for non-existing resource
 GET http://localhost:3001/api/persons/9000
