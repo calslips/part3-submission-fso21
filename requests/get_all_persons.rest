@@ -1,2 +1,3 @@
 ### successful GET req for all persons
-GET http://localhost:3001/api/persons
+# GET http://localhost:3001/api/persons
+GET https://enigmatic-journey-43702.herokuapp.com/api/persons/

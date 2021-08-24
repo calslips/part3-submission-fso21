@@ -1,5 +1,6 @@
 ### succcessful POST req to persons
-POST http://localhost:3001/api/persons
+# POST http://localhost:3001/api/persons
+POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
 Content-Type: application/json
 
 {
@@ -8,7 +9,8 @@ Content-Type: application/json
 }
 
 ### unsuccessful POST req to persons due to missing name
-POST http://localhost:3001/api/persons
+# POST http://localhost:3001/api/persons
+POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
 Content-Type: application/json
 
 {
@@ -16,7 +18,8 @@ Content-Type: application/json
 }
 
 ### unsuccessful POST req to persons due to empty name
-POST http://localhost:3001/api/persons
+# POST http://localhost:3001/api/persons
+POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
 Content-Type: application/json
 
 {
@@ -25,7 +28,8 @@ Content-Type: application/json
 }
 
 ### unsuccessful POST req to persons due to missing number
-POST http://localhost:3001/api/persons
+# POST http://localhost:3001/api/persons
+POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
 Content-Type: application/json
 
 {
@@ -33,7 +37,8 @@ Content-Type: application/json
 }
 
 ### unsuccessful POST req to persons due to empty number
-POST http://localhost:3001/api/persons
+# POST http://localhost:3001/api/persons
+POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
 Content-Type: application/json
 
 {
@@ -42,7 +47,8 @@ Content-Type: application/json
 }
 
 ### unsuccessful POST req to persons, name already exists
-POST http://localhost:3001/api/persons
+# POST http://localhost:3001/api/persons
+POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
 Content-Type: application/json
 
 {

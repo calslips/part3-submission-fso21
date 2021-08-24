@@ -1,2 +1,3 @@
 ### successful GET req for info
-GET http://localhost:3001/info
+# GET http://localhost:3001/info
+GET https://enigmatic-journey-43702.herokuapp.com/info

@@ -1,5 +1,7 @@
 ### successful GET req for single resource
-GET http://localhost:3001/api/persons/3
+# GET http://localhost:3001/api/persons/3
+GET https://enigmatic-journey-43702.herokuapp.com/api/persons/3
 
 ### unsuccessful GET req for non-existing resource
-GET http://localhost:3001/api/persons/9000
+# GET http://localhost:3001/api/persons/9000
+GET https://enigmatic-journey-43702.herokuapp.com/api/persons/9007199254740991
