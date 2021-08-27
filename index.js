@@ -59,21 +59,32 @@ app.post('/api/persons', (req, res) => {
       error: 'missing number'
     })
   }
-  if (persons.find((p) => p.name.toUpperCase() === body.name.toUpperCase())) {
-    return res.status(400).json({
-      error: 'name must be unique'
+  // if (persons.find((p) => p.name.toUpperCase() === body.name.toUpperCase())) {
+  //   return res.status(400).json({
+  //     error: 'name must be unique'
+  //   })
+  // }
+
+  Person.findOne({ name: body.name }).then((queryResult) => {
+    console.log('FIND ONE RESULT:', queryResult);
+    if (queryResult) {
+      return res.status(400).json({
+        error: 'name must be unique'
+      });
+    }
+
+    const person = new Person({
+      name: body.name,
+      number: body.number,
+    });
+
+    person.save().then((savedPerson) => {
+      res.status(201).json(savedPerson)
     })
-  }
+  });
 
-  const person = {
-    id: Math.ceil(Math.random() * (persons.length * 100)),
-    name: body.name,
-    number: body.number
-  }
-
-  persons = persons.concat(person);
-
-  res.status(201).json(persons);
+  // persons = persons.concat(person);
+  // res.status(201).json(persons);
 });
 
 const PORT = process.env.PORT;
