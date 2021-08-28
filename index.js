@@ -12,6 +12,24 @@ app.use(express.static('build'));
 morgan.token('body', (req, res) => JSON.stringify(req.body));
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
 
+const unknownEndpoint = (req, res) => {
+  res.status(404).json({
+    error: 'unknown endpoint'
+  });
+};
+
+const errorHandler = (err, req, res, next) => {
+  console.error(err.message);
+
+  if (err.name === 'CastError') {
+    return res.status(400).json({
+      error: 'invalid id format'
+    });
+  }
+
+  next(err);
+};
+
 app.get('/info', (req, res) => {
   res.send(
     `
@@ -23,10 +41,11 @@ app.get('/info', (req, res) => {
   );
 });
 
-app.get('/api/persons', (req, res) => {
+app.get('/api/persons', (req, res, next) => {
   Person.find({}).then((persons) => {
     res.json(persons);
   })
+  .catch(next);
   // res.json(persons);
 });
 
@@ -39,7 +58,7 @@ app.get('/api/persons/:id', (req, res) => {
     : res.status(404).end();
 });
 
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req, res, next) => {
   // const id = Number(req.params.id);
   // persons = persons.filter((p) => p.id !== id);
   Person.findByIdAndRemove(req.params.id)
@@ -49,11 +68,12 @@ app.delete('/api/persons/:id', (req, res) => {
       } else {
         res.status(404).end()
       }
-    });
+    })
+    .catch(next);
   // res.status(204).end();
 });
 
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
   const body = req.body;
 
   if (!body.name) {
@@ -73,7 +93,7 @@ app.post('/api/persons', (req, res) => {
   // }
 
   Person.findOne({ name: body.name }).then((queryResult) => {
-    console.log('FIND ONE RESULT:', queryResult);
+    // console.log('FIND ONE RESULT:', queryResult);
     if (queryResult) {
       return res.status(400).json({
         error: 'name must be unique'
@@ -87,12 +107,17 @@ app.post('/api/persons', (req, res) => {
 
     person.save().then((savedPerson) => {
       res.status(201).json(savedPerson)
-    })
-  });
+    });
+  })
+  .catch(next);
 
   // persons = persons.concat(person);
   // res.status(201).json(persons);
 });
+
+app.use(unknownEndpoint);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
