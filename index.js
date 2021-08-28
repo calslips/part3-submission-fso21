@@ -92,28 +92,43 @@ app.post('/api/persons', (req, res, next) => {
   //   })
   // }
 
-  Person.findOne({ name: body.name }).then((queryResult) => {
-    // console.log('FIND ONE RESULT:', queryResult);
-    if (queryResult) {
-      return res.status(400).json({
-        error: 'name must be unique'
+  Person.findOne({ name: body.name })
+    .then((queryResult) => {
+      // console.log('FIND ONE RESULT:', queryResult);
+      if (queryResult) {
+        return res.status(400).json({
+          error: 'name must be unique'
+        });
+      }
+
+      const person = new Person({
+        name: body.name,
+        number: body.number,
       });
-    }
 
-    const person = new Person({
-      name: body.name,
-      number: body.number,
-    });
-
-    person.save().then((savedPerson) => {
-      res.status(201).json(savedPerson)
-    });
-  })
-  .catch(next);
+      person.save().then((savedPerson) => {
+        res.status(201).json(savedPerson)
+      });
+    })
+    .catch(next);
 
   // persons = persons.concat(person);
   // res.status(201).json(persons);
 });
+
+app.put('/api/persons/:id', (req, res, next) => {
+  const body = req.body;
+
+  const person = {
+    number: body.number
+  };
+
+  Person.findByIdAndUpdate(req.params.id, person, { new: true })
+    .then((updatedPerson) => {
+      res.json(updatedPerson);
+    })
+    .catch(next);
+})
 
 app.use(unknownEndpoint);
 
