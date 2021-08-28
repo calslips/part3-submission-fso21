@@ -40,10 +40,17 @@ app.get('/api/persons/:id', (req, res) => {
 });
 
 app.delete('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id);
-  persons = persons.filter((p) => p.id !== id);
-
-  res.status(204).end();
+  // const id = Number(req.params.id);
+  // persons = persons.filter((p) => p.id !== id);
+  Person.findByIdAndRemove(req.params.id)
+    .then((result) => {
+      if (result) {
+        res.status(204).end();
+      } else {
+        res.status(404).end()
+      }
+    });
+  // res.status(204).end();
 });
 
 app.post('/api/persons', (req, res) => {
