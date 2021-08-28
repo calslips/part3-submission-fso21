@@ -1,0 +1,7 @@
+### successful PUT req to update entry number
+PUT http://localhost:3001/api/persons/612abdba23e839160a68fbdb
+Content-Type: application/json
+
+{
+  "number": "098-765-4321"
+}
