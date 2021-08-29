@@ -1,7 +1,26 @@
 ### successful PUT req to update entry number
-PUT http://localhost:3001/api/persons/612abdba23e839160a68fbdb
+# PUT http://localhost:3001/api/persons/612abdba23e839160a68fbdb
+PUT https://enigmatic-journey-43702.herokuapp.com/api/persons/612abdba23e839160a68fbdb
 Content-Type: application/json
 
 {
   "number": "098-765-4321"
+}
+
+### unsuccessful PUT req to update entry number, insufficient number length
+# PUT http://localhost:3001/api/persons/612abdba23e839160a68fbdb
+PUT https://enigmatic-journey-43702.herokuapp.com/api/persons/612abdba23e839160a68fbdb
+Content-Type: application/json
+
+{
+  "number": "434-098"
+}
+
+### unsuccessful PUT req to update entry number, invalid number format
+# PUT http://localhost:3001/api/persons/612abdba23e839160a68fbdb
+PUT https://enigmatic-journey-43702.herokuapp.com/api/persons/612abdba23e839160a68fbdb
+Content-Type: application/json
+
+{
+  "number": "9179887624"
 }

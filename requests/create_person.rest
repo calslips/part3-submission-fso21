@@ -27,6 +27,16 @@ Content-Type: application/json
   "number": "921-655-1392"
 }
 
+### unsuccessful POST req to persons due to insufficient name length
+# POST http://localhost:3001/api/persons
+POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
+Content-Type: application/json
+
+{
+  "name": "Yo",
+  "number": "549-393-4967"
+}
+
 ### unsuccessful POST req to persons due to missing number
 # POST http://localhost:3001/api/persons
 POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
@@ -46,12 +56,32 @@ Content-Type: application/json
   "number": ""
 }
 
+### unsuccessful POST req to persons due to insufficient number length
+# POST http://localhost:3001/api/persons
+POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
+Content-Type: application/json
+
+{
+  "name": "Phoenix Rising",
+  "number": "921-655"
+}
+
+### unsuccessful POST req to persons due to invalid number format
+# POST http://localhost:3001/api/persons
+POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
+Content-Type: application/json
+
+{
+  "name": "Nautilus Prime",
+  "number": "4563992303"
+}
+
 ### unsuccessful POST req to persons, name already exists
 # POST http://localhost:3001/api/persons
 POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
 Content-Type: application/json
 
 {
-  "name": "mary poppendieck",
-  "number": "39-23-6423122"
+  "name": "Ada Lovelace",
+  "number": "040-1231236"
 }

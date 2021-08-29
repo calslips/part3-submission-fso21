@@ -1,3 +1,11 @@
 ### successful DELETE req of single resource
-# DELETE http://localhost:3001/api/persons/1
-DELETE https://enigmatic-journey-43702.herokuapp.com/api/persons/1
+# DELETE http://localhost:3001/api/persons/<REPLACE WITH ID OF ENTRY TO DELETE>
+DELETE https://enigmatic-journey-43702.herokuapp.com/api/persons/<REPLACE WITH ID OF ENTRY TO DELETE>
+
+### unsuccessful DELETE req of single resource, non-existent id
+# DELETE http://localhost:3001/api/persons/6129cf6ffe935308e4e0d9eb
+DELETE https://enigmatic-journey-43702.herokuapp.com/api/persons/6129cf6ffe935308e4e0d9eb
+
+### unsuccessful DELETE req of single resource, invalid id format
+# DELETE http://localhost:3001/api/persons/321invalidid987
+DELETE https://enigmatic-journey-43702.herokuapp.com/api/persons/321invalidid987
