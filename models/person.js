@@ -21,11 +21,17 @@ mongoose
 const personSchema = mongoose.Schema({
   name: {
     type: String,
+    minLength: 3,
     required: true,
     unique: true,
   },
   number: {
     type: String,
+    minLength: 8,
+    validate: {
+      validator: (v) => /\d{3}-\d{3}-\d{4}/.test(v),
+      message: (props) => `Edit ${props.value} into phone number format ###-###-####`
+    },
     required: true,
   },
 });
