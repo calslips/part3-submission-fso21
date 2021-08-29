@@ -25,6 +25,10 @@ const errorHandler = (err, req, res, next) => {
     return res.status(400).json({
       error: 'invalid id format'
     });
+  } else if (err.name === 'ValidationError') {
+    return res.status(400).json({
+      error: err.message
+    });
   }
 
   next(err);
@@ -103,25 +107,35 @@ app.post('/api/persons', (req, res, next) => {
   //   })
   // }
 
-  Person.findOne({ name: body.name })
-    .then((queryResult) => {
-      // console.log('FIND ONE RESULT:', queryResult);
-      if (queryResult) {
-        return res.status(400).json({
-          error: 'name must be unique'
-        });
-      }
+  const person = new Person({
+    name: body.name,
+    number: body.number,
+  });
 
-      const person = new Person({
-        name: body.name,
-        number: body.number,
-      });
-
-      person.save().then((savedPerson) => {
-        res.status(201).json(savedPerson)
-      });
+  person.save()
+    .then((savedPerson) => {
+      res.status(201).json(savedPerson)
     })
     .catch(next);
+  // Person.findOne({ name: body.name })
+  //   .then((queryResult) => {
+  //     // console.log('FIND ONE RESULT:', queryResult);
+  //     if (queryResult) {
+  //       return res.status(400).json({
+  //         error: 'name must be unique'
+  //       });
+  //     }
+
+  //     const person = new Person({
+  //       name: body.name,
+  //       number: body.number,
+  //     });
+
+  //     person.save().then((savedPerson) => {
+  //       res.status(201).json(savedPerson)
+  //     });
+  //   })
+  //   .catch(next);
 
   // persons = persons.concat(person);
   // res.status(201).json(persons);
