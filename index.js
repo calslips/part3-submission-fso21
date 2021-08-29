@@ -30,15 +30,18 @@ const errorHandler = (err, req, res, next) => {
   next(err);
 };
 
-app.get('/info', (req, res) => {
-  res.send(
-    `
-    <div>
-      <p>Phonebook has info for ${persons.length} people</p>
-      <p>${new Date()}</p>
-    </div>
-    `
-  );
+app.get('/info', (req, res, next) => {
+  Person.find({}).then((persons) => {
+    res.send(
+      `
+      <div>
+        <p>Phonebook has info for ${persons.length} people</p>
+        <p>${new Date()}</p>
+      </div>
+      `
+    );
+  })
+  .catch(next);
 });
 
 app.get('/api/persons', (req, res, next) => {
@@ -49,13 +52,21 @@ app.get('/api/persons', (req, res, next) => {
   // res.json(persons);
 });
 
-app.get('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const person = persons.find((p) => p.id === id);
-
-  person
-    ? res.json(person)
-    : res.status(404).end();
+app.get('/api/persons/:id', (req, res, next) => {
+  // const id = Number(req.params.id);
+  // const person = persons.find((p) => p.id === id);
+  Person.findById(req.params.id)
+    .then((person) => {
+      if (person) {
+        res.json(person);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch(next);
+  // person
+  //   ? res.json(person)
+  //   : res.status(404).end();
 });
 
 app.delete('/api/persons/:id', (req, res, next) => {
