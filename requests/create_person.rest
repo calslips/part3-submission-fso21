@@ -82,6 +82,6 @@ POST https://enigmatic-journey-43702.herokuapp.com/api/persons/
 Content-Type: application/json
 
 {
-  "name": "Ada Lovelace",
-  "number": "040-1231236"
+  "name": "Victor Frank",
+  "number": "747-632-0906"
 }
